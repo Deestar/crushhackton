@@ -407,16 +407,29 @@ body > main > section > header > button > svg {
   display: flex;
   column-gap: 0.6rem;
 }
-.setup-main > ul > li > div > button {
-  height: max-content;
-  width: max-content;
+.setup-main :where(ul > li > div > button) {
   background: transparent;
-  border: none;
+  border: 2px dashed #8a8a8a;
+  width: 2.4rem;
+  height: 2.4rem;
+  min-height: 2.4rem;
+  min-width: 2.4rem;
+  border-radius: 50%;
+  outline: none;
   cursor: pointer;
 }
+.setup-main :where(ul > li > div > button):hover {
+  border: 2px solid #8a8a8a;
+}
+.setup-main :where(ul > li > div > button):focus {
+  border: 2px solid #8a8a8a;
+  background-color: #d9d9d9;
+  outline: none;
+}
+
 .setup-main > ul > li > div > button > svg {
-  width: 2rem;
-  height: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 .setup-main > ul > li > div > article {
   display: flex;
@@ -947,6 +960,25 @@ h2 {
 .max-h-0 {
   max-height: 0px;
 }
+.btnAnimate {
+  animation: clickAnimate 0.5s ease-in;
+}
+.btnRemove {
+  animation: removeAnimate 0.5s ease-in;
+}
+.click {
+  border: none;
+  border-color: transparent;
+  outline: none;
+}
+.click:hover {
+  border: none;
+}
+.click:focus {
+  background-color: auto;
+  border: none;
+}
+
 @keyframes expandSub {
   from {
     max-height: 40px;
@@ -985,5 +1017,22 @@ h2 {
   }
   to {
     max-height: 400px;
+  }
+}
+@keyframes clickAnimate {
+  from {
+    border: 2px solid #1c181d;
+    border-top-color: transparent;
+  }
+  to {
+    border: 2px solid #1c181d;
+    border-top-color: transparent;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes removeAnimate {
+  to {
+    transform: rotate(-360deg);
   }
 }

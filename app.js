@@ -24,10 +24,8 @@ const setupArrow = document.querySelector("#setup-arrow");
 const guideContainer = document.querySelector("#guide-cont");
 // Get guide List items
 const guidesteps = document.querySelectorAll("#guide-cont li");
-// Get guide buttons
-const guidebtns = document.querySelectorAll("#guide-cont>li>div> button>svg");
-// Get the Use tags
-const guideUse = document.querySelectorAll("#guide-cont button use");
+// Get guide buttons svg
+const guidebtns = document.querySelectorAll("#guide-cont > li > div > button");
 // Get Guide articles
 const guideArticles = document.querySelectorAll("#guide-cont article");
 // Get Guide articles
@@ -112,20 +110,6 @@ const showGuideSteps = () => {
   addClass(guideContainer, ["guide-open"]);
 };
 
-// Function to change the circle of the guide btn on an event
-function hoverGuideCircle(event) {
-  event.stopPropagation();
-  const { target } = event;
-  const getUse = target.firstElementChild;
-  getUse.setAttribute("xlink:href", "#lhover");
-}
-function hoverOutGuideCircle(event) {
-  event.stopPropagation();
-  const { target } = event;
-  const getUse = target.firstElementChild;
-  getUse.setAttribute("xlink:href", "#linitial");
-}
-
 // Function to Collapse Guide
 const closeGuideInfo = (index) => {
   //  Get the guide li
@@ -180,34 +164,38 @@ const ShowGuideInfo = (index) => {
   removeClass(getImage, ["collapse"]);
 };
 
+// -------------> Use of use tags in logic starts here
+
 // Get the previosly open index ~ mini useState
 let prevOpen = 0;
 // Array state for checked index ~ mini useState
 let checkedArray = [];
 // Function to change button to checked when clicked
-const RollCheck = function (index) {
-  const getUse = guideUse[index];
-  const isClicked = getUse.getAttribute("xlink:href");
-  if (isClicked === "#linitial" || isClicked === "#lhover") {
+const RollCheck = (event, index) => {
+  event.stopPropagation();
+  const getButton = guidebtns[index];
+  console.log(getButton);
+  const isClicked = getButton.getAttribute("class");
+  if (isClicked !== "click") {
     // Run button clicked effect
-    getUse.setAttribute("xlink:href", "#lloader");
+    addClass(getButton, ["click", "btnAnimate"]);
     setTimeout(() => {
-      getUse.setAttribute("xlink:href", "#lfinal");
-    }, 100);
-
-    // Remove the eventlistners when checked
-    guidebtns[index].removeEventListener("mouseenter", hoverGuideCircle);
-    guidebtns[index].removeEventListener("mouseleave", hoverOutGuideCircle);
-
+      removeClass(getButton, ["btnAnimate"]);
+      getButton.innerHTML = `
+      <svg>
+        <use xlink:href="#lfinal" />
+      </svg>
+    `;
+    }, 500);
     // Add index to array of checked
     checkedArray.push(index);
 
-    // Check if currently open guide is checked
-    const currentUse = guideUse[prevOpen];
-    const isCurrentClicked = currentUse.getAttribute("xlink:href");
-
+    // Check if currently open guide is clicked
+    const currentUse = guidebtns[prevOpen];
+    const isCurrentClicked = hasClass(currentUse, "click");
+    console.log(isCurrentClicked);
     // If the current btn is clicked
-    if (isCurrentClicked !== "#linitial" && isCurrentClicked !== "#lhover") {
+    if (isCurrentClicked) {
       // Close current guide
       closeGuideInfo(prevOpen);
       // Open Next unchecked step ------->
@@ -231,11 +219,12 @@ const RollCheck = function (index) {
       }
     }
   } else {
-    // Add the hover event Listners back
-    getUse.setAttribute("xlink:href", "#linitial");
-    guidebtns[index].addEventListener("mouseenter", hoverGuideCircle);
-    guidebtns[index].addEventListener("mouseleave", hoverOutGuideCircle);
-
+    addClass(getButton, ["btnRemove"]);
+    setTimeout(() => {
+      removeClass(getButton, ["click"]);
+      removeClass(getButton, ["btnRemove"]);
+      getButton.innerHTML = ``;
+    }, 500);
     // Remove index from array of checked
     checkedArray = checkedArray.filter((checked) => checked !== index);
   }
@@ -294,13 +283,11 @@ setupArrow.addEventListener("click", () => {
   }
 });
 
-// Add eventListner to each guide buttons
-guidebtns.forEach((e, i, array) => {
-  e.addEventListener("mouseenter", hoverGuideCircle);
-  e.addEventListener("mouseleave", hoverOutGuideCircle);
-  e.addEventListener("click", () => RollCheck(i, array));
-});
-
 guideArticles.forEach((e, i) => {
   e.addEventListener("click", () => OpenGuide(i));
+});
+
+// Add onclick to the guide buttons to check them
+guidebtns.forEach((e, i) => {
+  e.addEventListener("click", (event) => RollCheck(event, i));
 });
