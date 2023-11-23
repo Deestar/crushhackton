@@ -201,8 +201,8 @@ const RollCheck = function (index) {
 
     // Add index to array of checked
     checkedArray.push(index);
-    // Close currently open guide
-    closeGuideInfo(index);
+    // Close currently guide
+    closeGuideInfo(prevOpen);
     // Open Next unchecked step----->
     // Loop that runs 5 times
     for (let i = 0; i < 5; i++) {
