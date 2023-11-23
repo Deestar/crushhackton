@@ -80,7 +80,7 @@
                 </svg>
               </button>
             </label>
-            <a class="v-o h-0" href="https://admin.shopify.com">
+            <a class="" href="https://admin.shopify.com">
               <svg>
                 <use xlink:href="#navhouse" />
               </svg>
@@ -88,34 +88,30 @@
             </a>
           </header>
           <ul>
-            <a class="v-o h-0" href="https://admin.shopify.com">
+            <a class="" href="https://admin.shopify.com">
               <li>Help Center</li></a
             >
-            <a class="v-o h-0" href="https://admin.shopify.com">
-              <li>Changelog</li></a
-            >
-            <a class="v-o h-0" href="https://admin.shopify.com">
+            <a class="" href="https://admin.shopify.com"> <li>Changelog</li></a>
+            <a class="" href="https://admin.shopify.com">
               <li>Community forums</li></a
             >
-            <a class="v-o h-0" href="https://admin.shopify.com"
+            <a class="" href="https://admin.shopify.com"
               ><li>Hire a Shopify Partner</li></a
             >
-            <a class="v-o h-0" href="https://admin.shopify.com">
+            <a class="" href="https://admin.shopify.com">
               <li>Keyboard shortcuts</li></a
             >
           </ul>
           <footer>
-            <h2 class="v-o h-0">
+            <h2 class="">
               David Micheal <br />
               <span>davidmicheal@gmail.com</span>
             </h2>
             <ul>
-              <a class="v-o h-0" href="https://admin.shopify.com">
+              <a class="" href="https://admin.shopify.com">
                 <li>Manage account</li></a
               >
-              <a class="v-o h-0" href="https://admin.shopify.com">
-                <li>Log out</li></a
-              >
+              <a class="" href="https://admin.shopify.com"> <li>Log out</li></a>
             </ul>
           </footer>
         </section>
@@ -143,7 +139,7 @@
                 </p>
               </div>
               <label>
-                <p><span>1</span>/<span>5</span> completed</p>
+                <p><span id="guide-count">0</span>/<span>5</span> completed</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="72"
@@ -152,7 +148,12 @@
                   fill="none"
                 >
                   <rect width="72" height="4" rx="2" fill="#E3E3E3" />
-                  <rect width="14.4" height="4" fill="#1A1A1A" />
+                  <rect
+                    id="guide-progress"
+                    width="2"
+                    height="4"
+                    fill="#1A1A1A"
+                  />
                 </svg>
               </label>
             </div>
@@ -163,8 +164,8 @@
               />
             </button>
           </header>
-          <ul id="guide-cont" class="overflow-y-hidden">
-            <li class="">
+          <ul id="guide-cont" class="overflow-y-hidden unclicked">
+            <li class="bg-ash">
               <div>
                 <button>
                   <svg>
@@ -173,16 +174,18 @@
                 </button>
                 <article class="">
                   <h2 class="">Customize your online store</h2>
-                  <p class="collapse">
-                    Choose a theme and add your logo, colors, and images to
-                    reflect your brand.
-                    <span> Learn more </span>
-                  </p>
-                  <button class="collapse">Customize theme</button>
+                  <footer class="">
+                    <p class="">
+                      Choose a theme and add your logo, colors, and images to
+                      reflect your brand.
+                      <span> Learn more </span>
+                    </p>
+                    <button class="">Customize theme</button>
+                  </footer>
                 </article>
               </div>
               <img
-                class="hidden"
+                class=""
                 src="https://crushingit.tech/hackathon-assets/customise-store.png"
                 alt="domain image"
               />
@@ -195,20 +198,22 @@
                     <use xlink:href="#linitial" />
                   </svg>
                 </button>
-                <article>
+                <article class="max-h-0 cursor-pointer">
                   <h2 class="">Add your first product</h2>
-                  <p class="">
-                    Write a description, add photos, and set pricing for the
-                    products you plan to sell. <span> Learn more </span>
-                  </p>
-                  <div>
-                    <button class="">Add product</button>
-                    <button class="btn2">Import product</button>
-                  </div>
+                  <footer class="pb-0">
+                    <p class="">
+                      Write a description, add photos, and set pricing for the
+                      products you plan to sell. <span> Learn more </span>
+                    </p>
+                    <div>
+                      <button class="btn1">Add product</button>
+                      <button class="btn2">Import product</button>
+                    </div>
+                  </footer>
                 </article>
               </div>
               <img
-                class=""
+                class="collapse"
                 src="https://crushingit.tech/hackathon-assets/product.png"
                 alt="domain image"
               />
@@ -221,18 +226,21 @@
                     <use xlink:href="#linitial" />
                   </svg>
                 </button>
-                <article>
+                <article class="max-h-0 cursor-pointer">
                   <h2>Add a custom domain</h2>
-                  <p class="hidden">
-                    Your current domain is 222219.myshopify.com but you can add
-                    a custom domain to help customers find your online store.
-                    <span> Learn more </span>
-                  </p>
-                  <button class="hidden">Add domain</button>
+                  <footer class="pb-0">
+                    <p class="">
+                      Your current domain is 222219.myshopify.com but you can
+                      add a custom domain to help customers find your online
+                      store.
+                      <span> Learn more </span>
+                    </p>
+                    <button class="">Add domain</button>
+                  </footer>
                 </article>
               </div>
               <img
-                class="hidden"
+                class="collapse"
                 src="https://crushingit.tech/hackathon-assets/website.png"
                 alt="domain image"
               />
@@ -245,18 +253,21 @@
                     <use xlink:href="#linitial" />
                   </svg>
                 </button>
-                <article>
+                <article class="max-h-0 cursor-pointer">
                   <h2>Name your store</h2>
-                  <p class="hidden">
-                    Your temporary store name is currently Davii collections.
-                    The store name appears in your admin and your online store.
-                    <span> Learn more </span>
-                  </p>
-                  <button class="hidden">Name store</button>
+                  <footer class="pb-0">
+                    <p class="">
+                      Your temporary store name is currently Davii collections.
+                      The store name appears in your admin and your online
+                      store.
+                      <span> Learn more </span>
+                    </p>
+                    <button class="">Name store</button>
+                  </footer>
                 </article>
               </div>
               <img
-                class="hidden"
+                class="collapse"
                 src="https://crushingit.tech/hackathon-assets/name-store.png"
                 alt="domain image"
               />
@@ -269,15 +280,17 @@
                     <use xlink:href="#linitial" />
                   </svg>
                 </button>
-                <article>
+                <article class="max-h-0 cursor-pointer">
                   <h2>Set up a payment provider</h2>
-                  <p class="collapse">
-                    Choose a payment provider to start accepting payments.
-                    You'll need to create an account with the payment provider
-                    and set it up with your Shopify store.
-                    <span> Learn more </span>
-                  </p>
-                  <button class="collapse">Set up payment</button>
+                  <footer class="pb-0">
+                    <p class="">
+                      Choose a payment provider to start accepting payments.
+                      You'll need to create an account with the payment provider
+                      and set it up with your Shopify store.
+                      <span> Learn more </span>
+                    </p>
+                    <button class="">Set up payment</button>
+                  </footer>
                 </article>
               </div>
               <img
@@ -290,8 +303,6 @@
         </article>
       </section>
     </main>
-
-    <script src="./app.js"></script>
 
     <!--------------------------------- SVG ICONS --------------------------------->
 
@@ -365,6 +376,7 @@
       <defs>
         <symbol id="linitial" viewBox="0 0 24 24" fill="none">
           <circle
+            id="linitial-circle"
             cx="12"
             cy="12"
             r="10"
@@ -381,8 +393,9 @@
     <!-- List Hover -->
     <svg style="display: none">
       <defs>
-        <symbol viewBox="0 0 24 24" id="lhover">
+        <symbol viewBox="0 0 24 24" id="lhover" fill="none">
           <circle
+            id="linitial-circle"
             cx="12"
             cy="12"
             r="10"
@@ -390,6 +403,7 @@
             stroke-width="2.08333"
             stroke-linecap="round"
             stroke-linejoin="round"
+            stroke-dasharray="0"
           />
         </symbol>
       </defs>
@@ -398,7 +412,7 @@
     <!-- List Focus -->
     <svg style="display: none">
       <defs>
-        <symbol viewBox="0 0 24 24" id="lfocus">
+        <symbol viewBox="0 0 24 24" fill="none" id="lfocus">
           <circle
             cx="12"
             cy="12"
@@ -416,11 +430,11 @@
     <!-- List Loader -->
     <svg style="display: none" width="40" height="40">
       <defs>
-        <symbol viewBox="0 0 28 28" id="lloader">
+        <symbol viewBox="0 0 24 24" fill="none" id="lloader">
           <path
-            d="M26 14C26 16.3734 25.2962 18.6935 23.9776 20.6668C22.6591 22.6402 20.7849 24.1783 18.5922 25.0866C16.3995 25.9948 13.9867 26.2324 11.6589 25.7694C9.33114 25.3064 7.19295 24.1635 5.51472 22.4853C3.83649 20.8071 2.6936 18.6689 2.23058 16.3411C1.76755 14.0133 2.00519 11.6005 2.91345 9.4078C3.8217 7.21509 5.35977 5.34094 7.33316 4.02236C9.30655 2.70379 11.6266 2 14 2"
-            stroke="#fff"
-            stroke-width="2.5"
+            d="M22.0004 12C22.0004 13.9778 21.4139 15.9112 20.3151 17.5557C19.2162 19.2002 17.6545 20.4819 15.8272 21.2388C13.9999 21.9957 11.9893 22.1937 10.0495 21.8079C8.10965 21.422 6.32782 20.4696 4.9293 19.0711C3.53077 17.6725 2.57837 15.8907 2.19251 13.9509C1.80666 12.0111 2.00469 10.0004 2.76157 8.17317C3.51845 6.3459 4.80017 4.78412 6.44466 3.6853C8.08916 2.58649 10.0226 2 12.0004 2"
+            stroke="#1C181D"
+            stroke-width="2.08333"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
@@ -431,12 +445,23 @@
     <!-- List Final -->
     <svg width="40" height="40" fill="none" style="display: none">
       <defs>
-        <symbol id="lfinal" viewBox="0 0 24 24">
+        <symbol id="lfinal" fill="none" viewBox="0 0 24 24">
+          <circle
+            cx="11.9996"
+            cy="12"
+            r="10"
+            fill="#1C181D"
+            stroke="#1C181D"
+            stroke-width="2.08333"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
           <path
-            d="M17.2738 8.52629C17.6643 8.91682 17.6643 9.54998 17.2738 9.94051L11.4405 15.7738C11.05 16.1644 10.4168 16.1644 10.0263 15.7738L7.3596 13.1072C6.96908 12.7166 6.96908 12.0835 7.3596 11.693C7.75013 11.3024 8.38329 11.3024 8.77382 11.693L10.7334 13.6525L15.8596 8.52629C16.2501 8.13577 16.8833 8.13577 17.2738 8.52629Z"
-            fill="#fff"
-          ></path>
-          <circle cx="12" cy="12" r="10" fill="#303030"></circle>
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M16.8162 8.64149C17.0603 8.88557 17.0603 9.2813 16.8162 9.52538L11.3995 14.942C11.1555 15.1861 10.7597 15.1861 10.5157 14.942L7.80733 12.2337C7.56325 11.9896 7.56325 11.5939 7.80733 11.3498C8.0514 11.1057 8.44713 11.1057 8.69121 11.3498L10.9576 13.6162L15.9323 8.64149C16.1764 8.39742 16.5721 8.39742 16.8162 8.64149Z"
+            fill="white"
+          />
         </symbol>
       </defs>
     </svg>
@@ -506,4 +531,5 @@
       </defs>
     </svg>
   </body>
+  <script src="./app.js"></script>
 </html>
