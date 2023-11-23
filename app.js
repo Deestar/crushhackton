@@ -272,10 +272,16 @@ getNotification.addEventListener("click", () => {
 });
 // Toggle Setup Guide
 setupArrow.addEventListener("click", () => {
-  hasClass(guideContainer, "unclicked") ||
-  hasClass(guideContainer, "guide-open")
-    ? closeGuideSteps()
-    : showGuideSteps();
+  if (
+    hasClass(guideContainer, "unclicked") ||
+    hasClass(guideContainer, "guide-open")
+  ) {
+    addClass(setupArrow, ["rotate-180"]);
+    closeGuideSteps();
+  } else {
+    removeClass(setupArrow, ["rotate-180"]);
+    showGuideSteps();
+  }
 });
 
 // Add eventListner to each guide buttons

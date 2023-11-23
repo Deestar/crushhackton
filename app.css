@@ -377,6 +377,7 @@ body > main > section > header > button > svg {
   height: max-content;
   display: grid;
   place-content: center;
+  transition: transform ease 300ms;
 }
 .setup-main > header > button:hover {
   background: #f1f1f1;
@@ -934,7 +935,7 @@ h2 {
   cursor: auto;
 }
 .rotate-180 {
-  transform: rotate(180deg);
+  transform: rotate(-180deg);
 }
 .svg-nostroke {
   stroke-dasharray: 0;
