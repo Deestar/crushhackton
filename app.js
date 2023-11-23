@@ -201,24 +201,34 @@ const RollCheck = function (index) {
 
     // Add index to array of checked
     checkedArray.push(index);
-    // Close currently guide
-    closeGuideInfo(prevOpen);
-    // Open Next unchecked step----->
-    // Loop that runs 5 times
-    for (let i = 0; i < 5; i++) {
-      // Check if the current index (0-4) is not in the array
-      if (!checkedArray.includes(i)) {
-        // Check if this is the first displayed guide
-        // Open the first guide info between 0-4 that is not in the array
-        i !== prevOpen && ShowGuideInfo(i);
-        prevOpen = i;
-        break;
+
+    // Check if currently open guide is checked
+    const currentUse = guideUse[prevOpen];
+    const isCurrentClicked = currentUse.getAttribute("xlink:href");
+
+    // If the current btn is clicked
+    if (isCurrentClicked !== "#linitial" && isCurrentClicked !== "#lhover") {
+      // Close current guide
+      closeGuideInfo(prevOpen);
+      // Open Next unchecked step ------->
+
+      // Loop that runs 5 times
+      for (let i = 0; i < 5; i++) {
+        // Check if the current index (0-4) is not in the array
+        if (!checkedArray.includes(i)) {
+          // Check if this is the first displayed guide
+          // Open the first guide info between 0-4 that is not in the array
+          i !== prevOpen && ShowGuideInfo(i);
+          prevOpen = i;
+          break;
+        }
       }
-    }
-    // If checked boxes is complete set prevOpen to 6
-    // This allows reopening any guide
-    if (checkedArray.length === 5) {
-      prevOpen = 6;
+
+      // If checked boxes is complete set prevOpen to 6
+      // This allows reopening any guide
+      if (checkedArray.length === 5) {
+        prevOpen = 6;
+      }
     }
   } else {
     // Add the hover event Listners back
