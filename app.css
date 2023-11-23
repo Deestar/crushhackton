@@ -22,9 +22,10 @@ body {
 }
 body {
   width: 100%;
+  background: #f1f1f1;
 }
 body > main {
-  height: 100%;
+  height: var(--h);
   background: #f1f1f1;
   overflow-y: auto;
   padding-bottom: 3rem;
