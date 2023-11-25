@@ -1,6 +1,8 @@
 // Get User Profile
-const userProfile = document.querySelector("#devil");
-// Get User Profile
+const userProfile = document.querySelector("#navLabel");
+// Get User Profile button
+const userProfileBtn = document.querySelector("#devil");
+// Get User Submenu
 const subMenu = document.querySelector("#menu");
 // Get Name from submenu
 const subName = document.querySelector("#menu footer h2");
@@ -26,6 +28,10 @@ const guideContainer = document.querySelector("#guide-cont");
 const guidesteps = document.querySelectorAll("#guide-cont li");
 // Get guide buttons svg
 const guidebtns = document.querySelectorAll("#guide-cont > li > div > button");
+// Get guide article buttons svg
+const guideArticlebtns = document.querySelectorAll(
+  "#guide-cont > li > div >article button"
+);
 // Get Guide articles
 const guideArticles = document.querySelectorAll("#guide-cont article");
 // Get Guide articles
@@ -68,6 +74,24 @@ const hasClass = (element, className) => {
   return element.classList.contains(className);
 };
 
+// Function to close menu when escape key is pressed
+function handleEscapeKeyPess(event) {
+  event.key === "Escape" && HideMenu();
+}
+
+// Function to hide Menu
+const HideMenu = () => {
+  addClass(subMenu, ["sub-close"]);
+  //   Remove the open animation class
+  removeClass(subMenu, ["sub-open"]);
+  userProfileBtn.setAttribute("aria-expanded", "false");
+  // Wrap up submenu
+  setTimeout(() => {
+    addClass(subMenu, ["hidden"]);
+  }, 401);
+  userProfileBtn.focus();
+};
+
 // Function to show Menu
 const ShowMenu = () => {
   // Remove display hidden and run height animation
@@ -76,17 +100,37 @@ const ShowMenu = () => {
   addClass(subMenu, ["sub-open"]);
   //   Remove the close animation
   hasClass(subMenu, "sub-close") && removeClass(subMenu, ["sub-close"]);
+  userProfileBtn.setAttribute("aria-expanded", "true");
+  // Focusing bringing element from overflow hidden so i set timeout to delay focus for animation
+  setTimeout(() => {
+    subAnchors[0].focus();
+  }, 500);
+  // Add escape close for menu
+  subMenu.addEventListener("keyup", handleEscapeKeyPess);
 };
 
-// Function to hide Menu
-const HideMenu = () => {
-  addClass(subMenu, ["sub-close"]);
-  //   Remove the open animation class
-  removeClass(subMenu, ["sub-open"]);
-  // Wrap up submenu
-  setTimeout(() => {
-    addClass(subMenu, ["hidden"]);
-  }, 401);
+// Function to move user focus in submenu with keypress
+const moveSubMenuFocus = (event, index) => {
+  // Get the key pressed
+  const getKey = event.key;
+  // If user press arrow right or down move to next arrow
+
+  // If user press arrow left or up move to previous arrow
+  if (
+    getKey === "ArrowDown" ||
+    getKey === "ArrowRight" ||
+    getKey === "x" ||
+    getKey === "d"
+  ) {
+    index === 7 ? subAnchors[0].focus() : subAnchors[index + 1].focus();
+  } else if (
+    getKey === "ArrowUp" ||
+    getKey === "ArrowLeft" ||
+    getKey === "w" ||
+    getKey === "a"
+  ) {
+    index === 0 ? subAnchors[7].focus() : subAnchors[index - 1].focus();
+  }
 };
 
 // Function to close setup Guide
@@ -99,6 +143,10 @@ const closeGuideSteps = () => {
     removeClass(guideContainer, ["unclicked"]);
   // Hide Guide List
   addClass(guideContainer, ["guide-close"]);
+  // Set aria-label to open
+  setupArrow.setAttribute("aria-label", "open setup guide");
+  // Set aria-expanded to false
+  setupArrow.setAttribute("aria-expanded", "false");
 };
 
 // Function to close setup Guide
@@ -108,6 +156,11 @@ const showGuideSteps = () => {
     removeClass(guideContainer, ["guide-close"]);
   // Show Guide List
   addClass(guideContainer, ["guide-open"]);
+
+  // Set aria-label to open
+  setupArrow.setAttribute("aria-label", "close setup guide");
+  // Set aria-expanded to open
+  setupArrow.setAttribute("aria-expanded", "true");
 };
 
 // Function to Collapse Guide
@@ -121,7 +174,10 @@ const closeGuideInfo = (index) => {
   // Get the Image
   const getImage = guideImages[index];
   // Remove guide-open added by show function
-  hasClass(getArticle, "guide-open") && removeClass(getArticle, ["guide-open"]);
+  hasClass(getArticle, "guide-info-open") &&
+    removeClass(getArticle, ["guide-info-open"]);
+  // Get btns in article
+  const ButtonInArticle = getArticle.querySelectorAll("button");
   //  --->Ends
 
   // Add pointer class
@@ -132,6 +188,10 @@ const closeGuideInfo = (index) => {
   addClass(getFooter, ["pb-0", "collapse"]);
   // Remove Guide Image
   addClass(getImage, ["collapse"]);
+  // Show Article Btns
+  addClass(ButtonInArticle, ["collapse"]);
+  // set guide button aria-expanded to collapsed
+  guidebtns[index].setAttribute("aria-expanded", "false");
 };
 
 // Function to Open A Guide
@@ -144,6 +204,8 @@ const ShowGuideInfo = (index) => {
   const getFooter = guideMains[index];
   // Get the Image
   const getImage = guideImages[index];
+  // Get btns in article
+  const ButtonInArticle = getArticle.querySelectorAll("button");
   // Remove guide-open added by close function
   hasClass(getFooter, "collapse") && removeClass(getFooter, ["collapse"]);
   //  --->Ends
@@ -157,11 +219,15 @@ const ShowGuideInfo = (index) => {
   // add the ash background
   addClass(getCont, ["bg-ash"]);
   // Run the Open height animation
-  addClass(getArticle, ["guide-open"]);
+  addClass(getArticle, ["guide-info-open"]);
   // add default Padding from footer
   removeClass(getFooter, ["pb-0"]);
   // Add Guide Image
   removeClass(getImage, ["collapse"]);
+  // Collapse Article buttons
+  removeClass(ButtonInArticle, ["collapse"]);
+  // set guide button aria-expanded to expanded
+  guidebtns[index].setAttribute("aria-expanded", "true");
 };
 
 // -------------> Use of use tags in logic starts here
@@ -174,8 +240,8 @@ let checkedArray = [];
 const RollCheck = (event, index) => {
   event.stopPropagation();
   const getButton = guidebtns[index];
-  console.log(getButton);
   const isClicked = getButton.getAttribute("class");
+  // If the check button is unchecked run click fn
   if (isClicked !== "click") {
     // Run button clicked effect
     addClass(getButton, ["click", "btnAnimate"]);
@@ -191,9 +257,11 @@ const RollCheck = (event, index) => {
     checkedArray.push(index);
 
     // Check if currently open guide is clicked
-    const currentUse = guidebtns[prevOpen];
-    const isCurrentClicked = hasClass(currentUse, "click");
-    console.log(isCurrentClicked);
+    let isCurrentClicked = false;
+    if (prevOpen !== false) {
+      const currentUse = guidebtns[prevOpen];
+      isCurrentClicked = hasClass(currentUse, "click");
+    }
     // If the current btn is clicked
     if (isCurrentClicked) {
       // Close current guide
@@ -207,6 +275,9 @@ const RollCheck = (event, index) => {
           // Check if this is the first displayed guide
           // Open the first guide info between 0-4 that is not in the array
           i !== prevOpen && ShowGuideInfo(i);
+
+          // Move focus on the next guide button
+          guidebtns[i].focus();
           prevOpen = i;
           break;
         }
@@ -215,8 +286,11 @@ const RollCheck = (event, index) => {
       // If checked boxes is complete set prevOpen to 6
       // This allows reopening any guide
       if (checkedArray.length === 5) {
-        prevOpen = 6;
+        prevOpen = false;
       }
+    } else {
+      // Retain focus on the current guide button
+      guidebtns[prevOpen].focus();
     }
   } else {
     addClass(getButton, ["btnRemove"]);
@@ -234,9 +308,10 @@ const RollCheck = (event, index) => {
   const getprogress = 14.4 * checkedArray.length;
   guideprogress.setAttribute("width", getprogress.toString());
 };
+
 const OpenGuide = (index) => {
   // Close the previously open guide info
-  index !== prevOpen && prevOpen !== 6 && closeGuideInfo(prevOpen);
+  index !== prevOpen && prevOpen !== false && closeGuideInfo(prevOpen);
 
   // Open Up The Clicked Guide Info
   index !== prevOpen && ShowGuideInfo(index);
@@ -244,8 +319,10 @@ const OpenGuide = (index) => {
 };
 // ---------> Function Ends Here
 
-// Toggle animation when user profile is clicked
-userProfile.addEventListener("click", () => {
+// Toggle sub-menu with animation when user profile is clicked
+userProfile.addEventListener("click", (event) => {
+  event.stopImmediatePropagation();
+  event.stopPropagation();
   if (hasClass(subMenu, "hidden")) {
     // If the dialog notification is open
     dialog.close();
@@ -253,6 +330,15 @@ userProfile.addEventListener("click", () => {
   hasClass(subMenu, "hidden") ? ShowMenu() : HideMenu();
 });
 
+// If user profile is focused and enter is clicked
+userProfile.addEventListener("keydown", (event) => {
+  // Get the element that is clicked ~ to make sure it doesnt run when the button is clicked
+  const targetId = event.target.id;
+  // Check if the pressed key is Enter (key code 13)
+  if (event.key === "Enter" && targetId !== "devil") {
+    ShowMenu();
+  }
+});
 // Remove plan alert when cancel button is clicked
 cancelTrial.addEventListener("click", () => {
   addClass(planAlert, ["fade"]);
@@ -266,9 +352,18 @@ getNotification.addEventListener("click", () => {
   if (!dialog.open) {
     // If the submenu is open close it
     !hasClass(subMenu, "hidden") && HideMenu();
+
+    // Allow escape key to close dialog
+    dialog.addEventListener("keydown", (event) => {
+      event.stopImmediatePropagation();
+      if ((event.key = "Escape")) {
+        dialog.close();
+      }
+    });
   }
   dialog.open ? dialog.close() : dialog.show();
 });
+
 // Toggle Setup Guide
 setupArrow.addEventListener("click", () => {
   if (
@@ -290,4 +385,9 @@ guideArticles.forEach((e, i) => {
 // Add onclick to the guide buttons to check them
 guidebtns.forEach((e, i) => {
   e.addEventListener("click", (event) => RollCheck(event, i));
+});
+
+// Add keydown event to all submenu items
+subAnchors.forEach((e, index) => {
+  e.addEventListener("keydown", (event) => moveSubMenuFocus(event, index));
 });

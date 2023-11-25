@@ -32,23 +32,37 @@
           <input type="search" id="search" name="q" placeholder="Search" />
         </form>
         <aside>
-          <button id="notification">
+          <button
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            aria-label="notifications"
+            aria-controls="dialog"
+            id="notification"
+          >
             <svg>
               <use xlink:href="#bell" />
             </svg>
           </button>
-          <label>
-            <p>Devil Collections</p>
-            <button id="devil">DC</button>
-          </label>
+          <div aria-labelledby="menu-label" id="navLabel" tabindex="0">
+            <p id="menu-label">Devil Collections</p>
+            <button
+              id="devil"
+              aria-label="Devil Button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="menu"
+            >
+              DC
+            </button>
+          </div>
         </aside>
 
         <!-- Alert Dialog box -->
-        <dialog class="dialog" id="dialog">
+        <dialog class="dialog" aria-label="notifications" id="dialog">
           <header>
             <h2>Alerts</h2>
             <aside>
-              <button>
+              <button aria-label="Dropdown">
                 <svg style="width: 20px; height: 20px">
                   <use xlink:href="#notiDropdown" />
                 </svg>
@@ -67,14 +81,19 @@
         <!-- Alert Dialog Ends -->
 
         <!-- Sub Navbar -->
-        <section class="menu overflow-y-hidden hidden" id="menu">
+        <ul
+          class="menu overflow-y-hidden hidden"
+          id="menu"
+          aria-labelledby="devil"
+          role="menu"
+        >
           <header>
             <label>
               <div>
-                <button>DC</button>
+                <button role="menuitem">DC</button>
                 <h3>Davil Collections</h3>
               </div>
-              <button>
+              <button role="menuitem">
                 <svg style="width: 1.6rem; height: 1.6rem">
                   <use xlink:href="#navcheck" />
                 </svg>
@@ -88,17 +107,19 @@
             </a>
           </header>
           <ul>
-            <a class="" href="https://admin.shopify.com">
+            <a role="menuitem" class="" href="https://admin.shopify.com">
               <li>Help Center</li></a
             >
-            <a class="" href="https://admin.shopify.com"> <li>Changelog</li></a>
-            <a class="" href="https://admin.shopify.com">
+            <a role="menuitem" class="" href="https://admin.shopify.com">
+              <li>Changelog</li></a
+            >
+            <a role="menuitem" class="" href="https://admin.shopify.com">
               <li>Community forums</li></a
             >
-            <a class="" href="https://admin.shopify.com"
+            <a role="menuitem" class="" href="https://admin.shopify.com"
               ><li>Hire a Shopify Partner</li></a
             >
-            <a class="" href="https://admin.shopify.com">
+            <a role="menuitem" class="" href="https://admin.shopify.com">
               <li>Keyboard shortcuts</li></a
             >
           </ul>
@@ -108,13 +129,15 @@
               <span>davidmicheal@gmail.com</span>
             </h2>
             <ul>
-              <a class="" href="https://admin.shopify.com">
+              <a role="menuitem" class="" href="https://admin.shopify.com">
                 <li>Manage account</li></a
               >
-              <a class="" href="https://admin.shopify.com"> <li>Log out</li></a>
+              <a role="menuitem" class="" href="https://admin.shopify.com">
+                <li>Log out</li></a
+              >
             </ul>
           </footer>
-        </section>
+        </ul>
         <!-- Sub Navbar Ends -->
       </nav>
       <section>
@@ -123,7 +146,7 @@
             <p>Extend your trial for $1/month for 3 months on select plans.</p>
             <a href="shopify.com/pricing">Select a plan</a>
           </div>
-          <button id="trial_cancel">
+          <button aria-label="Cancel Plan Pop-up" id="trial_cancel">
             <svg>
               <use xlink:href="#cancel" />
             </svg>
@@ -157,19 +180,29 @@
                 </svg>
               </label>
             </div>
-            <button id="setup-arrow">
+            <button
+              aria-label="close setup guide"
+              id="setup-arrow"
+              aria-haspopup="true"
+              aria-expanded="true"
+              aria-controls="guide-cont"
+            >
               <img
                 src="https://crushingit.tech/hackathon-assets/icon-arrow-up.svg"
                 alt="arrow down"
               />
             </button>
           </header>
-          <ul id="guide-cont" class="overflow-y-hidden unclicked">
+          <ul id="guide-cont" role="list" class="overflow-y-hidden unclicked">
             <li class="bg-ash">
               <div>
-                <button></button>
+                <button
+                  aria-labelledby="first-guide"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                ></button>
                 <article class="">
-                  <h2 class="">Customize your online store</h2>
+                  <h2 id="first-guide">Customize your online store</h2>
                   <footer class="">
                     <p class="">
                       Choose a theme and add your logo, colors, and images to
@@ -189,17 +222,21 @@
 
             <li>
               <div>
-                <button></button>
+                <button
+                  aria-labelledby="second-guide"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                ></button>
                 <article class="max-h-0 cursor-pointer">
-                  <h2 class="">Add your first product</h2>
+                  <h2 class="" id="second-guide">Add your first product</h2>
                   <footer class="pb-0">
                     <p class="">
                       Write a description, add photos, and set pricing for the
                       products you plan to sell. <span> Learn more </span>
                     </p>
                     <div>
-                      <button class="btn1">Add product</button>
-                      <button class="btn2">Import product</button>
+                      <button class="btn1 collapse">Add product</button>
+                      <button class="btn2 collapse">Import product</button>
                     </div>
                   </footer>
                 </article>
@@ -213,9 +250,13 @@
 
             <li>
               <div>
-                <button></button>
+                <button
+                  aria-labelledby="third-guide"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                ></button>
                 <article class="max-h-0 cursor-pointer">
-                  <h2>Add a custom domain</h2>
+                  <h2 id="third-guide">Add a custom domain</h2>
                   <footer class="pb-0">
                     <p class="">
                       Your current domain is 222219.myshopify.com but you can
@@ -223,7 +264,7 @@
                       store.
                       <span> Learn more </span>
                     </p>
-                    <button class="">Add domain</button>
+                    <button class="collapse">Add domain</button>
                   </footer>
                 </article>
               </div>
@@ -236,9 +277,13 @@
 
             <li>
               <div>
-                <button></button>
+                <button
+                  aria-labelledby="fourth-guide"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                ></button>
                 <article class="max-h-0 cursor-pointer">
-                  <h2>Name your store</h2>
+                  <h2 id="fourth-guide">Name your store</h2>
                   <footer class="pb-0">
                     <p class="">
                       Your temporary store name is currently Davii collections.
@@ -246,7 +291,7 @@
                       store.
                       <span> Learn more </span>
                     </p>
-                    <button class="">Name store</button>
+                    <button class="collapse">Name store</button>
                   </footer>
                 </article>
               </div>
@@ -259,9 +304,14 @@
 
             <li class="">
               <div>
-                <button class=""></button>
+                <button
+                  class=""
+                  aria-labelledby="fifth-guide"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                ></button>
                 <article class="max-h-0 cursor-pointer">
-                  <h2>Set up a payment provider</h2>
+                  <h2 id="fifth-guide">Set up a payment provider</h2>
                   <footer class="pb-0">
                     <p class="">
                       Choose a payment provider to start accepting payments.
@@ -269,7 +319,7 @@
                       and set it up with your Shopify store.
                       <span> Learn more </span>
                     </p>
-                    <button class="">Set up payment</button>
+                    <button class="collapse">Set up payment</button>
                   </footer>
                 </article>
               </div>
@@ -347,77 +397,6 @@
               d="m18.3086 29.1747 7.3798-1.8395s-3.1728-21.53194-3.1963-21.67344c-.0235-.14151-.1411-.23584-.2586-.23584s-2.1857-.04717-2.1857-.04717-1.2692-1.22635-1.7392-1.69802z"
             />
           </g>
-        </symbol>
-      </defs>
-    </svg>
-
-    <!-- list initial -->
-    <svg style="display: none">
-      <defs>
-        <symbol id="linitial" viewBox="0 0 24 24" fill="none">
-          <circle
-            id="linitial-circle"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="#8A8A8A"
-            stroke-width="2.08333"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-dasharray="5 5"
-          />
-        </symbol>
-      </defs>
-    </svg>
-
-    <!-- List Hover -->
-    <svg style="display: none">
-      <defs>
-        <symbol viewBox="0 0 24 24" id="lhover" fill="none">
-          <circle
-            id="linitial-circle"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="#8A8A8A"
-            stroke-width="2.08333"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-dasharray="0"
-          />
-        </symbol>
-      </defs>
-    </svg>
-
-    <!-- List Focus -->
-    <svg style="display: none">
-      <defs>
-        <symbol viewBox="0 0 24 24" fill="none" id="lfocus">
-          <circle
-            cx="12"
-            cy="12"
-            r="10"
-            fill="#D9D9D9"
-            stroke="#8A8A8A"
-            stroke-width="2.08333"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </symbol>
-      </defs>
-    </svg>
-
-    <!-- List Loader -->
-    <svg style="display: none" width="40" height="40">
-      <defs>
-        <symbol viewBox="0 0 24 24" fill="none" id="lloader">
-          <path
-            d="M22.0004 12C22.0004 13.9778 21.4139 15.9112 20.3151 17.5557C19.2162 19.2002 17.6545 20.4819 15.8272 21.2388C13.9999 21.9957 11.9893 22.1937 10.0495 21.8079C8.10965 21.422 6.32782 20.4696 4.9293 19.0711C3.53077 17.6725 2.57837 15.8907 2.19251 13.9509C1.80666 12.0111 2.00469 10.0004 2.76157 8.17317C3.51845 6.3459 4.80017 4.78412 6.44466 3.6853C8.08916 2.58649 10.0226 2 12.0004 2"
-            stroke="#1C181D"
-            stroke-width="2.08333"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
         </symbol>
       </defs>
     </svg>

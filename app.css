@@ -126,19 +126,20 @@ body > main > nav > aside > button > svg {
   width: 2rem;
   height: 2rem;
 }
-body > main > nav > aside > label {
+body > main > nav > aside > div {
   display: flex;
 }
-body > main > nav > aside > label:hover {
+body > main > nav > aside > div:hover {
   background: #616161;
   cursor: pointer;
 }
-body > main > nav > aside > label:focus {
-  background: #656266;
+body > main > nav > aside > div:focus {
+  border-radius: 8px;
+  background: var(--grey-grey-50, #656266);
   box-shadow: 0px 0px 0px 3px #005bd3, 0px 0px 0px 1px #000;
 }
 @media (min-width: 520px) {
-  body > main > nav > aside > label {
+  body > main > nav > aside > div {
     border-radius: 8px;
     background: var(--grey-grey-200, #303030);
     padding: 0.2rem 0.8rem;
@@ -146,7 +147,7 @@ body > main > nav > aside > label:focus {
   }
 }
 
-body > main > nav > aside > label > button {
+body > main > nav > aside > div > button {
   border-radius: 0.6rem;
   background: #36fba1;
   padding: min(2vw, 0.6rem);
@@ -160,14 +161,15 @@ body > main > nav > aside > label > button {
   line-height: 1.56rem;
   font-weight: 600;
 }
-body > main > nav > aside > label > button:hover {
+body > main > nav > aside > div > button:hover {
   background: #36fba1;
 }
-body > main > nav > aside > label > p {
+
+body > main > nav > aside > div > p {
   display: none;
 }
 @media (min-width: 520px) {
-  body > main > nav > aside > label > p {
+  body > main > nav > aside > div > p {
     display: block;
     align-self: center;
     color: var(--font-light, #e3e3e3);
@@ -385,6 +387,11 @@ body > main > section > header > button > svg {
   border-radius: 0.6rem;
   cursor: pointer;
 }
+.setup-main > header > button:focus {
+  border: 2px solid var(--states-focused, #005bd3);
+  border-radius: 6px;
+  outline: none;
+}
 @media (min-width: 620px) {
   .setup-main > header > button > img {
     width: 2.8rem;
@@ -417,6 +424,7 @@ body > main > section > header > button > svg {
   border-radius: 50%;
   outline: none;
   cursor: pointer;
+  transition: all ease 400ms;
 }
 .setup-main :where(ul > li > div > button):hover {
   border: 2px solid #8a8a8a;
@@ -527,8 +535,7 @@ body > main > section > header > button > svg {
   align-items: center;
 }
 
-.setup-main :where(ul > li > div > article > footer > div > button),
-.setup-main :where(ul > li > div > article > footer > button) {
+.setup-main :where(ul > li > div > article > footer button) {
   background: #404040;
   color: #f6f3f6;
   font-family: Inter;
@@ -549,7 +556,15 @@ body > main > section > header > button > svg {
   box-shadow: 0px 0px 0px 1.5px #333, 0px 1px 0px 1.5px #333,
     0px 2px 0px 0px #000;
 }
-
+.setup-main :where(ul > li > div > article > footer button):focus {
+  border-radius: 6px;
+  border-top: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.2));
+  border-right: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.2));
+  border-left: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.2));
+  background: #404040;
+  box-shadow: 0px 0px 0px 5px #005bd3, 0px 0px 0px 3px #fff,
+    0px 0px 0px 1.5px #333;
+}
 .setup-main > ul > li > div > article > footer > div > button:hover,
 .setup-main > ul > li > div > article > footer > button:hover {
   background: #2a2a2a;
@@ -560,8 +575,8 @@ body > main > section > header > button > svg {
   }
 }
 .setup-main > ul > li > img {
-  max-width: 15.7rem;
-  max-height: 13.7rem;
+  width: 15.7rem;
+  height: 13.7rem;
 }
 @media (max-width: 620px) {
   .setup-main > ul > li > img {
@@ -675,8 +690,7 @@ dialog > footer > h4 {
   transition: height ease-in 1s;
 }
 .menu > header {
-  padding: 0rem 0.6rem;
-  padding-bottom: 0.4rem;
+  padding: 0 0.6rem;
   display: flex;
   flex-direction: column;
   row-gap: 0.4rem;
@@ -750,6 +764,11 @@ dialog > footer > h4 {
 }
 .menu > header > a:hover {
   background: #f1f1f1;
+}
+.menu a:focus {
+  border-radius: 8px;
+  outline: none;
+  border: 2px solid var(--states-focused, #005bd3);
 }
 .menu > header > a > svg {
   width: 2rem;
@@ -930,14 +949,21 @@ h2 {
 .sub-close {
   animation: closeSub 0.4s forwards ease-in;
 }
-.guide-close {
-  animation: closeGuide 0.6s forwards ease-in;
-}
+
 .pb-0 {
   padding-bottom: 0;
 }
 .guide-open {
   animation: openGuide 0.6s forwards ease-in;
+}
+.guide-close {
+  animation: closeGuide 0.6s forwards ease-in;
+}
+.guide-info-open {
+  animation: openInfoGuide 0.6s forwards ease-in;
+}
+.guide-info-close {
+  animation: closeInfoGuide 0.6s forwards ease-in;
 }
 .fade {
   animation: fadeOuts 10ms forwards ease-in;
@@ -981,7 +1007,7 @@ h2 {
 
 @keyframes expandSub {
   from {
-    max-height: 40px;
+    max-height: 0px;
   }
   to {
     max-height: 380px;
@@ -1009,6 +1035,7 @@ h2 {
   }
   to {
     max-height: 0px;
+    display: none;
   }
 }
 @keyframes openGuide {
@@ -1017,6 +1044,25 @@ h2 {
   }
   to {
     max-height: 400px;
+    display: block;
+  }
+}
+@keyframes closeInfoGuide {
+  from {
+    max-height: 400px;
+  }
+  to {
+    max-height: 0px;
+    display: none;
+  }
+}
+@keyframes openInfoGuide {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 400px;
+    display: flex;
   }
 }
 @keyframes clickAnimate {
