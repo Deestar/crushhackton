@@ -290,7 +290,7 @@ const RollCheck = (event, index) => {
       }
     } else {
       // Retain focus on the current guide button
-      guidebtns[prevOpen].focus();
+      guidebtns[prevOpen]?.focus();
     }
   } else {
     addClass(getButton, ["btnRemove"]);
